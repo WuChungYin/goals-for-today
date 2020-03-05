@@ -134,15 +134,6 @@ class TeamTodoScreen extends Component {
             </View>
           }
         />
-
-        <CustomActionButton
-          position="right"
-          style={styles.addNewGoalButton}
-          onPress={this.showAddNewGoal}
-        >
-          <Text style={styles.addNewGoalButtonText}>+</Text>
-        </CustomActionButton>
-
         <SafeAreaView />
       </View>
     );
