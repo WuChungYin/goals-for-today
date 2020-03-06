@@ -94,7 +94,6 @@ class ViewTodoScreen extends Component {
       documentData,
       isLoading: false
     });
-    console.log("comment documentData = " + this.state.documentData);
   };
 
   handleDeleteTask = () => {
@@ -132,7 +131,7 @@ class ViewTodoScreen extends Component {
   };
 
   hideAddComment = () => {
-    this.setState({ isAddCommentVisible: false });
+    this.setState({ isAddCommentVisible: false, newcomment: "" });
   };
 
   updateTextInput = (text, field) => {
@@ -142,8 +141,12 @@ class ViewTodoScreen extends Component {
   };
 
   handleAddComment = () => {
-    this.props.addComment(this.state.task.Task_ID, this.state.newcomment);
-    this.hideAddComment();
+    if (this.state.newcomment != "") {
+      this.props.addComment(this.state.task.Task_ID, this.state.newcomment);
+      this.hideAddComment();
+    } else {
+      alert("Comment must be between 1 and 500 characters long");
+    }
   };
 
   handleDeleteComment = item => {

@@ -48,13 +48,24 @@ class EditTodoScreen extends Component {
     state[field] = text;
     this.setState(state);
   };
+
   handleUpdate = () => {
-    this.props.updateTask(
-      this.state.key,
-      this.state.taskname,
-      this.state.taskdesc
-    );
-    this.props.navigation.navigate("ViewTodoScreen");
+    if (this.state.taskname != "") {
+      if (this.state.taskdesc != "") {
+        this.props.updateTask(
+          this.state.key,
+          this.state.taskname,
+          this.state.taskdesc
+        );
+        this.props.navigation.navigate("ViewTodoScreen");
+      } else {
+        alert(
+          "Please enter a task description between 1 and 200 characters long."
+        );
+      }
+    } else {
+      alert("Please enter a task name between 1 and 100 characters long.");
+    }
   };
 
   render() {

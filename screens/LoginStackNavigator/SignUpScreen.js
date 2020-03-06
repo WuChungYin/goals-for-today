@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Alert,
   View,
   Text,
   StyleSheet,
@@ -23,8 +24,12 @@ import {
 import Firebase from "../../config/Firebase";
 
 class SignUpScreen extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      teamname: "",
+      username: ""
+    };
   }
   componentDidMount = () => {
     Firebase.auth().onAuthStateChanged(user => {
@@ -37,6 +42,26 @@ class SignUpScreen extends Component {
         this.props.navigation.navigate("LoginStackNavigator");
       }
     });
+  };
+
+  componentWillUnmount = () => {
+    this.setState({
+      teamname: "",
+      username: ""
+    });
+  };
+
+  handleSignup = () => {
+    console.log(this.props.user.Team);
+    if (this.state.teamname != "") {
+      if (this.state.username != "") {
+        this.props.signup(this.state.teamname);
+      } else {
+        alert("Please enter a User name.");
+      }
+    } else {
+      alert("Please enter a Team name.");
+    }
   };
 
   render() {
@@ -60,7 +85,7 @@ class SignUpScreen extends Component {
           />
           <TextInput
             style={styles.textInput}
-            onChangeText={Team => this.props.updateTeamname(Team)}
+            onChangeText={Team => this.setState({ teamname: Team })}
             placeholder="Team Name"
             placeholderTextColor={colors.bgTextInputDark}
           />
@@ -82,7 +107,7 @@ class SignUpScreen extends Component {
         </View>
         <View style={{ alignItems: "center" }}>
           <CustomActionButton
-            onPress={() => this.props.signup()}
+            onPress={() => this.handleSignup()}
             style={styles.loginButtons}
           >
             <Text style={styles.buttonText}>Sign Up</Text>

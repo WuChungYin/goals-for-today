@@ -6,7 +6,8 @@ import {
   TextInput,
   Button,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  Alert
 } from "react-native";
 import CustomActionButton from "../../components/CustomActionButton";
 import { Ionicons } from "@expo/vector-icons";
@@ -39,8 +40,16 @@ class EditProfileScreen extends React.Component {
   };
 
   handleUpdate = () => {
-    this.props.updateProfile(this.state.username, this.state.teamname);
-    this.props.navigation.navigate("ProfileScreen");
+    if (this.state.username != "") {
+      if (this.state.teamname != "") {
+        this.props.updateProfile(this.state.username, this.state.teamname);
+        this.props.navigation.navigate("ProfileScreen");
+      } else {
+        alert("Please enter a Team name");
+      }
+    } else {
+      alert("Please enter a Username");
+    }
   };
 
   render() {

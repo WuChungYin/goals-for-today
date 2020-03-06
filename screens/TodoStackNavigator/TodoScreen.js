@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Alert,
   FlatList,
   SafeAreaView,
   TouchableOpacity,
@@ -25,7 +26,9 @@ class TodoScreen extends Component {
     this.state = {
       documentData: [],
       isAddNewGoalVisible: false,
-      isLoading: true
+      isLoading: true,
+      taskname: "",
+      taskdesc: ""
     };
   }
 
@@ -67,12 +70,28 @@ class TodoScreen extends Component {
   };
 
   hideAddNewGoal = () => {
-    this.setState({ isAddNewGoalVisible: false });
+    this.setState({ isAddNewGoalVisible: false, taskname: "", taskdesc: "" });
+  };
+
+  updateTextInput = (text, field) => {
+    const state = this.state;
+    state[field] = text;
+    this.setState(state);
   };
 
   handleAddGoal = () => {
-    this.props.addTask();
-    this.hideAddNewGoal();
+    if (this.state.taskname != "") {
+      if (this.state.taskdesc != "") {
+        this.props.addTask(this.state.taskname, this.state.taskdesc);
+        this.hideAddNewGoal();
+      } else {
+        alert(
+          "Please enter a task description between 1 and 200 characters long."
+        );
+      }
+    } else {
+      alert("Please enter a task name between 1 and 100 characters long.");
+    }
   };
 
   markAsCompleted = () => {};
@@ -137,9 +156,7 @@ class TodoScreen extends Component {
             <View>
               <View style={styles.textInputContainer}>
                 <TextInput
-                  onChangeText={Task_Name =>
-                    this.props.updateTaskName(Task_Name)
-                  }
+                  onChangeText={text => this.updateTextInput(text, "taskname")}
                   style={styles.textInput}
                   placeholder="Enter New Goal"
                   placeholderTextColor="grey"
@@ -148,9 +165,7 @@ class TodoScreen extends Component {
               </View>
               <View style={styles.textInputContainer}>
                 <TextInput
-                  onChangeText={Description =>
-                    this.props.updateDescription(Description)
-                  }
+                  onChangeText={text => this.updateTextInput(text, "taskdesc")}
                   style={styles.textInput}
                   placeholder="Enter Description"
                   placeholderTextColor="grey"

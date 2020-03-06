@@ -92,7 +92,7 @@ export const markAsIncomplete = Task_ID => {
   };
 };
 
-export const addTask = () => {
+export const addTask = (Task_Name, Description) => {
   return async (dispatch, getState) => {
     try {
       const {
@@ -103,7 +103,6 @@ export const addTask = () => {
         Team,
         Tasks_To_Do
       } = getState().user;
-      const { Task_Name, Description } = getState().task;
       const response = await db.collection("Tasks").doc();
       if (response.id) {
         const user = {
