@@ -47,8 +47,12 @@ class EditCommentScreen extends Component {
     this.setState(state);
   };
   handleUpdate = () => {
-    this.props.updateComment(this.state.key, this.state.commenttext);
-    this.props.navigation.navigate("ViewTodoScreen");
+    if (this.state.commenttext != "") {
+      this.props.updateComment(this.state.key, this.state.commenttext);
+      this.props.navigation.navigate("ViewTodoScreen");
+    } else {
+      alert("Please enter a comment between 1 and 500 characters long");
+    }
   };
 
   render() {
