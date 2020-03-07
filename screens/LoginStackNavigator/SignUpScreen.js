@@ -52,17 +52,20 @@ class SignUpScreen extends Component {
   };
 
   handleSignup = () => {
-    console.log(this.props.user.Team);
-    if (this.state.teamname != "") {
-      if (this.state.username != "") {
-        this.props.signup(this.state.teamname);
-      } else {
-        alert("Please enter a User name.");
+    //console.log(this.props.user.Team);
+    console.log("Username: " + this.state.username);
+    console.log("Teamname: " + this.state.teamname);
+
+    if (this.state.username != ""){
+      if (this.state.teamname != ""){
+        this.props.signup(this.state.username, this.state.teamname);
+      }else {
+        alert("Please enter a Team Name.")
       }
-    } else {
-      alert("Please enter a Team name.");
+    }else {
+      alert("Please enter a User Name.");
     }
-  };
+    };
 
   render() {
     return (
@@ -79,13 +82,15 @@ class SignUpScreen extends Component {
         <View style={styles.listItemContainer}>
           <TextInput
             style={styles.textInput}
-            onChangeText={Username => this.props.updateName(Username)}
+            onChangeText={Username => this.setState({username: Username})}
+            //onChangeText={Username => this.props.updateName(Username)}
             placeholder="Name"
             placeholderTextColor={colors.bgTextInputDark}
           />
           <TextInput
             style={styles.textInput}
             onChangeText={Team => this.setState({ teamname: Team })}
+            //onChangeText={Team => this.props.updateTeamname(Team)}
             placeholder="Team Name"
             placeholderTextColor={colors.bgTextInputDark}
           />
