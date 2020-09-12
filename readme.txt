@@ -9,3 +9,5 @@ Instructions To Start The App
   8. Wait for QR code
   9. Scan the QR code above with the Expo app (Android) or the Camera app (iOS)
   10. Open in Expo and wait for app to load
+  
+Video walkthrough of features: https://media.oregonstate.edu/media/t/1_hap1ei4r
