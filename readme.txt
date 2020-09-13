@@ -1,3 +1,5 @@
+Goals For Today is a to-do list app which allows users to create accounts, join teams, create/view/update/delete tasks, toggle to view team member tasks, view and post comments on personal and team member tasks, view personal and team member statistics, and receive daily reminder/summary emails.
+
 Instructions To Start The App
   1. Store goals-for-today folder in a directory of choice
   2. Download Expo client app on your smart phone
